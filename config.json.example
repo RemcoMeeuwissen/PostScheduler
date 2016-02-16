@@ -1,0 +1,10 @@
+{
+    "reddit": {
+        "key": "key",
+        "secret": "secret",
+        "callback": "callback"
+    },
+    "session": {
+        "secret": "secret"
+    }
+}

@@ -2,8 +2,9 @@
 
 const express = require('express');
 const nunjucks = require('nunjucks');
+const mongoose = require('mongoose');
 const session = require('express-session');
-const SessionFileStore = require('session-file-store')(session);
+const MongoStore = require('connect-mongo')(session);
 const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
 const logger = require('morgan');
@@ -15,6 +16,8 @@ const login = require('./routes/login');
 const authReddit = require('./routes/auth/reddit');
 const logout = require('./routes/logout');
 const account = require('./routes/account');
+
+mongoose.connect('mongodb://localhost/PostScheduler');
 
 const app = express();
 
@@ -40,7 +43,7 @@ nunjucks.configure('views', {
 app.use(logger('dev'));
 app.set('view engine', 'nunjucks');
 app.use(session({
-  store: new SessionFileStore,
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
   secret: config.session.secret,
   resave: false,
   saveUninitialized: true,

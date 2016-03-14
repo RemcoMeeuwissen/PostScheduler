@@ -1,11 +1,6 @@
 {% extends "base.nunjucks" %}
 
 {% block body %}
-  {% if user %}
-    <h1>Hello {{ user.name }}.</h1>
-    <a href="/logout">Logout</a>
-  {% else %}
-    <h1>Hello</h1>
-    <a href="/login">Login</a>
-  {% endif %}
+  <h1>Hello {{ user.username }}.</h1>
+  <a href="/logout">Logout</a>
 {% endblock %}

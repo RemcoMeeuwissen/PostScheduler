@@ -19,14 +19,29 @@ const account = require('./routes/account');
 
 mongoose.connect('mongodb://localhost/PostScheduler');
 
+const User = require('./models/user.js');
+
 const app = express();
 
-passport.serializeUser((user, done) => {
-  done(null, user);
+passport.serializeUser((authuser, done) => {
+  User.findOrCreate(authuser.name, (err, user) => {
+    if (err) {
+      done(err);
+    } else {
+      done(null, user.username);
+    }
+  });
 });
 
 passport.deserializeUser((obj, done) => {
-  done(null, obj);
+  const query = User.where({ username: obj });
+  query.findOne((err, user) => {
+    if (err) {
+      done(err);
+    } else {
+      done(null, user);
+    }
+  });
 });
 
 passport.use(new RedditStrategy({

@@ -11,7 +11,7 @@ userSchema.statics.findOrCreate = function findOrCreate(username, cb) {
 
   User.findOne({ username }, (err, user) => {
     if (err || user !== null) {
-      cb(err, null);
+      cb(err, user);
     } else {
       const newUser = new User({ username, authorized: false });
 

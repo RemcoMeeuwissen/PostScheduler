@@ -8,6 +8,7 @@ const MongoStore = require('connect-mongo')(session);
 const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
 const logger = require('morgan');
+const serveStatic = require('serve-static')
 
 const config = require('./config.json');
 
@@ -65,6 +66,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(serveStatic(__dirname + '/public'));
 
 app.use('/', index);
 app.use('/login', login);

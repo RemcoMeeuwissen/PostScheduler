@@ -1,18 +1,19 @@
 {
   "dependencies": {
     "express": "~4.13",
-    "nunjucks": "~2.3",
+    "nunjucks": "~2.4",
     "express-session": "~1.13",
     "passport": "~0.3",
     "passport-reddit": "~0.2",
-    "morgan": "~1.6",
+    "morgan": "~1.7",
     "debug": "~2.2",
     "mongoose": "~4.4",
-    "connect-mongo": "~1.1"
+    "connect-mongo": "~1.1",
+    "serve-static": "~1.10"
   },
   "devDependencies": {
-    "eslint": "~1.10",
-    "eslint-config-airbnb": "~5.0"
+    "eslint": "~2.4",
+    "eslint-config-airbnb": "~6.1"
   },
   "private": true
 }

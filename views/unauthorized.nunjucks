@@ -1,6 +1,8 @@
 {% extends "base.nunjucks" %}
 
 {% block body %}
-  <h1>You are not authorized to use this app</h1>
-  <p><a href="/logout">Click here to log out</a></p>
+  <div class="mui-panel">
+    <h1>You are not authorized to use this app</h1>
+    <a href="/logout" class="mui-btn mui-btn--primary">Click here to log out</a>
+  </div>
 {% endblock %}

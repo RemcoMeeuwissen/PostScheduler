@@ -1,8 +1,19 @@
+<!doctype html>
 <html>
   <head>
-    <title>Reddit Authentication</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="/assets/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/js/mui.min.js"></script>
+
+    <title>Reddit post scheduler</title>
   </head>
   <body>
-    {% block body %}{% endblock %}
+    <div class="mui-container">
+      {% block body %}{% endblock %}
+    </div>
   </body>
 </html>

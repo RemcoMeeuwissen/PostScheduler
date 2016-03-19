@@ -1,6 +1,7 @@
 {% extends "base.nunjucks" %}
 
 {% block body %}
-  <h1>Login</h1>
-  <a href="/auth/reddit">Login with Reddit</a>
+  <div class="mui--text-center login--button">
+    <a href="/auth/reddit" class="mui-btn mui-btn--primary">Login with Reddit</a>
+  </div>
 {% endblock %}

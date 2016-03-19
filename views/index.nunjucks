@@ -1,8 +1,23 @@
 {% extends "base.nunjucks" %}
 
 {% block body %}
-  <div class="mui-panel">
-    <h1>Hello {{ user.username }}.</h1>
-    <a href="/logout" class="mui-btn mui-btn--primary">Logout</a>
+  <div class="mui-row">
+    <div class="mui-col-md-12">
+      <div class="mui--pull-left">
+        <a href="/schedule" class="mui-btn mui-btn--primary mui-btn--raised">Schedule a post</a>
+      </div>
+      <div class="mui--pull-right">
+        <a href="/authorize" class="mui-btn mui-btn--raised">Authorized users</a>
+        <a href="/logout" class="mui-btn mui-btn--raised">Logout</a>
+      </div>
+    </div>
+    <div class="mui-col-md-12">
+      <div class="mui-panel posts--body">
+        <div class="mui--text-center">
+          <h1>Scheduled posts</h1>
+        </div>
+        <p>There are no scheduled posts yet</p>
+      </div>
+    </div>
   </div>
 {% endblock %}

@@ -4,6 +4,7 @@
   <div class="mui-row">
     <div class="mui-col-md-12">
       <div class="mui--pull-left">
+        <a href="/" class="mui-btn mui-btn--primary mui-btn--raised">View scheduled posts</a>
         <a href="/schedule" class="mui-btn mui-btn--primary mui-btn--raised">Schedule a post</a>
       </div>
       <div class="mui--pull-right">
@@ -36,8 +37,6 @@
             </li>
           {% endfor %}
         </ul>
-
-        <a href="/">View scheduled posts</a>
       </div>
     </div>
   </div>

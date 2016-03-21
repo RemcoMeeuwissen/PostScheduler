@@ -7,7 +7,7 @@
         <a href="/schedule" class="mui-btn mui-btn--primary mui-btn--raised">Schedule a post</a>
       </div>
       <div class="mui--pull-right">
-        <a href="/authorize" class="mui-btn mui-btn--raised">Authorized users</a>
+        <a href="/authorize" class="mui-btn mui-btn--raised">Manage authorizations</a>
         <a href="/logout" class="mui-btn mui-btn--raised">Logout</a>
       </div>
     </div>

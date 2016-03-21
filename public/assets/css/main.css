@@ -2,14 +2,18 @@ body {
     background-color: #f5f5f5;
 }
 
-.mui-container, .posts--body {
+.mui-container, .posts--body, .authorize--body, .message--body {
     margin-top: 1em;
+}
+
+.message--body {
+    margin-bottom: 0;
 }
 
 .login--button {
     margin-top: 4em;
 }
 
-.posts--body h1 {
+.posts--body h1, .authorize--body h1 {
     margin-top: 0;
 }

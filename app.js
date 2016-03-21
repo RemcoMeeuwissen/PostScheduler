@@ -17,7 +17,7 @@ const index = require('./routes/index');
 const login = require('./routes/login');
 const authReddit = require('./routes/auth/reddit');
 const logout = require('./routes/logout');
-const account = require('./routes/account');
+const authorize = require('./routes/authorize');
 
 mongoose.connect('mongodb://localhost/PostScheduler');
 
@@ -68,13 +68,13 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-app.use(serveStatic(__dirname + '/public'));
+app.use(serveStatic(`${__dirname}/public`));
 
 app.use('/', index);
 app.use('/login', login);
 app.use('/auth/reddit', authReddit);
 app.use('/logout', logout);
-app.use('/account', account);
+app.use('/authorize', authorize);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

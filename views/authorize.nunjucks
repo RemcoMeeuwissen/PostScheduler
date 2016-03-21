@@ -1,0 +1,44 @@
+{% extends "base.nunjucks" %}
+
+{% block body %}
+  <div class="mui-row">
+    <div class="mui-col-md-12">
+      <div class="mui--pull-left">
+        <a href="/schedule" class="mui-btn mui-btn--primary mui-btn--raised">Schedule a post</a>
+      </div>
+      <div class="mui--pull-right">
+        <a href="/authorize" class="mui-btn mui-btn--raised">Manage authorizations</a>
+        <a href="/logout" class="mui-btn mui-btn--raised">Logout</a>
+      </div>
+    </div>
+    {% for message in messages %}
+      <div class="mui-col-md-12">
+        <div class="mui-panel message--body">
+          {{ message }}
+        </div>
+      </div>
+    {% endfor %}
+    <div class="mui-col-md-12">
+      <div class="mui-panel authorize--body">
+        <div class="mui--text-center">
+          <h1>Manage authorizations</h1>
+        </div>
+
+        <ul class="mui-list--unstyled">
+          {% for user in users %}
+            <li>
+              {{ user.username }}
+              {% if current_user.id != user.id %}
+                - <a href="/authorize/{{ user.id }}">
+                  {% if user.authorized %}Unauthorize{% else %}Authorize{% endif %}
+                </a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+
+        <a href="/">View scheduled posts</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

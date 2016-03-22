@@ -9,6 +9,7 @@ const passport = require('passport');
 const RedditStrategy = require('passport-reddit').Strategy;
 const logger = require('morgan');
 const flash = require('connect-flash');
+const bodyParser = require('body-parser');
 const serveStatic = require('serve-static');
 
 const config = require('./config.json');
@@ -18,6 +19,7 @@ const login = require('./routes/login');
 const authReddit = require('./routes/auth/reddit');
 const logout = require('./routes/logout');
 const authorize = require('./routes/authorize');
+const schedule = require('./routes/schedule');
 
 mongoose.connect('mongodb://localhost/PostScheduler');
 
@@ -68,6 +70,8 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(serveStatic(`${__dirname}/public`));
 
 app.use('/', index);
@@ -75,6 +79,7 @@ app.use('/login', login);
 app.use('/auth/reddit', authReddit);
 app.use('/logout', logout);
 app.use('/authorize', authorize);
+app.use('/schedule', schedule);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

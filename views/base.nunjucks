@@ -6,8 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="/assets/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/pikaday.css" rel="stylesheet" type="text/css" />
     <link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+
     <script src="/assets/js/mui.min.js"></script>
+    <script src="/assets/js/pikaday.js"></script>
+    <script src="/assets/js/main.js"></script>
 
     <title>Reddit post scheduler</title>
   </head>

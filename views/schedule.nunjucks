@@ -1,0 +1,67 @@
+{% extends "base.nunjucks" %}
+
+{% block body %}
+  <div class="mui-row">
+    <div class="mui-col-md-12">
+      <div class="mui--pull-left">
+        <a href="/" class="mui-btn mui-btn--primary mui-btn--raised">View scheduled posts</a>
+      </div>
+      <div class="mui--pull-right">
+        <a href="/authorize" class="mui-btn mui-btn--raised">Manage authorizations</a>
+        <a href="/logout" class="mui-btn mui-btn--raised">Logout</a>
+      </div>
+    </div>
+
+    <div class="mui-col-md-12">
+      <div class="mui-panel schedule--body">
+        <form method="post" action="/schedule">
+          <legend>Schedule a new post</legend>
+
+          <div class="mui-textfield">
+            <label for="inputTitle">Title</label>
+            <input id="inputTitle" name="inputTitle" type="text" required>
+          </div>
+
+          <div class="mui-textfield">
+            <label for="inputBody">Body text</label>
+            <textarea id="inputBody" name="inputBody" required></textarea>
+          </div>
+
+          <div class="mui-textfield">
+            <label for="inputDate">Date</label>
+            <input id="inputDate" name="inputDate" type="text" required>
+          </div>
+
+          <div class="mui-textfield">
+            <label for="inputTime">Time (00:00 format, UTC timezone)</label>
+            <input id="inputTime" name="inputTime" type="text" required>
+          </div>
+
+          <div class="mui-textfield">
+            <label for="inputRepeats">Repeats</label>
+            <select id="inputRepeats" name="inputRepeats">
+              <option value="0" selected>No</option>
+              <option value="1">Yes</option>
+            </select>
+          </div>
+
+          <div class="mui-textfield js--interval">
+            <label for="inputInterval">How often does it repeat</label>
+            <select id="inputInterval" name="inputInterval">
+              <option value="daily" selected>Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="yearly">Yearly</option>
+            </select>
+          </div>
+
+          <button type="submit" class="mui-btn mui-btn--primary">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var picker = new Pikaday({ field: document.getElementById('inputDate') });
+    handleScheduleFormRepeat();
+  </script>
+{% endblock %}

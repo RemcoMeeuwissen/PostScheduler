@@ -6,7 +6,10 @@ const ensureAuthenticated = require('../middleware/ensureAuthenticated');
 const ensureAuthorized = require('../middleware/ensureAuthorized');
 
 router.get('/', ensureAuthenticated, ensureAuthorized, (req, res) => {
-  res.render('index', { user: req.user });
+  res.render('index', {
+    user: req.user,
+    messages: req.flash('info'),
+  });
 });
 
 module.exports = router;

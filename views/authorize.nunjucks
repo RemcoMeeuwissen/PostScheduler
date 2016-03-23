@@ -12,6 +12,7 @@
         <a href="/logout" class="mui-btn mui-btn--raised">Logout</a>
       </div>
     </div>
+
     {% for message in messages %}
       <div class="mui-col-md-12">
         <div class="mui-panel message--body">
@@ -19,6 +20,7 @@
         </div>
       </div>
     {% endfor %}
+
     <div class="mui-col-md-12">
       <div class="mui-panel authorize--body">
         <div class="mui--text-center">

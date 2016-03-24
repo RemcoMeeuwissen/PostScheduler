@@ -6,11 +6,11 @@ const ensureAuthenticated = require('../middleware/ensureAuthenticated');
 const ensureAuthorized = require('../middleware/ensureAuthorized');
 const Post = require('../models/post.js');
 
-router.get('/', ensureAuthenticated, ensureAuthorized, (req, res) => {
-  res.render('schedule');
+router.get('/new', ensureAuthenticated, ensureAuthorized, (req, res) => {
+  res.render('posts/new');
 });
 
-router.post('/', ensureAuthenticated, ensureAuthorized, (req, res) => {
+router.post('/new', ensureAuthenticated, ensureAuthorized, (req, res) => {
   const title = req.body.inputTitle;
   const body = req.body.inputBody;
   const time = new Date(new Date(req.body.inputDay).setHours(req.body.inputHour));

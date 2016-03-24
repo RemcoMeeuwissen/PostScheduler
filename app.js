@@ -19,7 +19,7 @@ const login = require('./routes/login');
 const authReddit = require('./routes/auth/reddit');
 const logout = require('./routes/logout');
 const authorize = require('./routes/authorize');
-const schedule = require('./routes/schedule');
+const posts = require('./routes/posts');
 
 mongoose.connect('mongodb://localhost/PostScheduler');
 
@@ -79,7 +79,7 @@ app.use('/login', login);
 app.use('/auth/reddit', authReddit);
 app.use('/logout', logout);
 app.use('/authorize', authorize);
-app.use('/schedule', schedule);
+app.use('/posts', posts);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

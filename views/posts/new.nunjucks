@@ -13,8 +13,8 @@
     </div>
 
     <div class="mui-col-md-12">
-      <div class="mui-panel schedule--body">
-        <form method="post" action="/schedule">
+      <div class="mui-panel posts--body">
+        <form method="post" action="/posts/new">
           <legend>Schedule a new post</legend>
 
           <div class="mui-textfield">

@@ -2,7 +2,7 @@ body {
     background-color: #f5f5f5;
 }
 
-.mui-container, .posts--body, .authorize--body, .schedule--body, .message--body {
+.mui-container, .posts--body, .authorize--body, .posts--body, .message--body {
     margin-top: 1em;
 }
 

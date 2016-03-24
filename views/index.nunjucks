@@ -25,7 +25,18 @@
         <div class="mui--text-center">
           <h1>Scheduled posts</h1>
         </div>
-        <p>There are no scheduled posts yet</p>
+
+        {% if message %}
+          <p>{{ message }}</p>
+        {% endif %}
+
+        {% if posts %}
+          <ul>
+            {% for post in posts %}
+              <li>{{ post.title }} scheduled on {{ post.time }} - <a href="/posts/edit/{{ post._id }}">Edit</a> or <a href="/posts/delete/{{ post._id }}">delete</a></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
       </div>
     </div>
   </div>

@@ -1,0 +1,31 @@
+{% extends "base.nunjucks" %}
+
+{% block body %}
+  <div class="mui-row">
+    <div class="mui-col-md-12">
+      <div class="mui--pull-left">
+        <a href="/" class="mui-btn mui-btn--primary mui-btn--raised">View scheduled posts</a>
+      </div>
+      <div class="mui--pull-right">
+        <a href="/authorize" class="mui-btn mui-btn--raised">Manage authorizations</a>
+        <a href="/logout" class="mui-btn mui-btn--raised">Logout</a>
+      </div>
+    </div>
+
+    <div class="mui-col-md-12">
+      {% if message %}
+        <p>{{ message }}
+      {% endif %}
+
+      {% if post %}
+        <div class="mui-panel posts--body">
+          <form method="post" action="/posts/delete/{{ post._id }}">
+            <legend>Are you sure you want to delete {{ post.title }}?</legend>
+
+            <button type="submit" class="mui-btn mui-btn--primary">Delete</button>
+          </form>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

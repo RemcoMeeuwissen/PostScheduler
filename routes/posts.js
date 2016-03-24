@@ -43,4 +43,30 @@ router.post('/new', ensureAuthenticated, ensureAuthorized, (req, res) => {
   });
 });
 
+router.get('/delete/:id', ensureAuthenticated, ensureAuthorized, (req, res) => {
+  Post.findOne({ _id: req.params.id }, (err, post) => {
+    if (err || post === null) {
+      res.render('posts/delete', {
+        message: 'Could not retrieve the post, please try again later.',
+      });
+    } else {
+      res.render('posts/delete', {
+        post,
+      });
+    }
+  });
+});
+
+router.post('/delete/:id', ensureAuthenticated, ensureAuthorized, (req, res) => {
+  Post.findOneAndRemove({ _id: req.params.id }, (err, post) => {
+    if (err || post === null) {
+      req.flash('info', 'Could not remove the post, please try again later.');
+    } else {
+      req.flash('info', 'Removed the post.');
+    }
+
+    return res.redirect('/');
+  });
+});
+
 module.exports = router;

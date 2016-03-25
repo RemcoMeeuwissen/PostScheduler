@@ -45,6 +45,28 @@ router.post('/new', ensureAuthenticated, ensureAuthorized, (req, res) => {
   });
 });
 
+router.get('/edit/:id', ensureAuthenticated, ensureAuthorized, (req, res) => {
+  Post.findOne({ _id: req.params.id }, (err, post) => {
+    if (err || post === null) {
+      res.render('posts/edit', {
+        message: 'Could not retrieve the post, please try again later.',
+      });
+    } else {
+      const time = new Date(post.time);
+      const year = time.getFullYear();
+      const month = time.getMonth();
+      const day = time.getDay();
+      const hours = time.getHours();
+      const minutes = time.getMinutes();
+
+      res.render('posts/edit', {
+        post,
+        time: `${year}.${month}.${day} ${hours}:${minutes}`,
+      });
+    }
+  });
+});
+
 router.get('/delete/:id', ensureAuthenticated, ensureAuthorized, (req, res) => {
   Post.findOne({ _id: req.params.id }, (err, post) => {
     if (err || post === null) {

@@ -1,0 +1,76 @@
+{% extends "base.nunjucks" %}
+
+{% block body %}
+  <div class="mui-row">
+    <div class="mui-col-md-12">
+      <div class="mui--pull-left">
+        <a href="/" class="mui-btn mui-btn--primary mui-btn--raised">View scheduled posts</a>
+      </div>
+      <div class="mui--pull-right">
+        <a href="/authorize" class="mui-btn mui-btn--raised">Manage authorizations</a>
+        <a href="/logout" class="mui-btn mui-btn--raised">Logout</a>
+      </div>
+    </div>
+
+    <div class="mui-col-md-12">
+      {% if message %}
+        <p>{{ message }}
+      {% endif %}
+
+      {% if post %}
+        <div class="mui-panel posts--body">
+          <form method="post" action="/posts/edit/{{ post._id }}">
+            <legend>Edit {{ post.title }}</legend>
+
+            <div class="mui-textfield">
+              <label for="inputTitle">Title</label>
+              <input id="inputTitle" name="inputTitle" type="text" value="{{ post.title }}" required>
+            </div>
+
+            <div class="mui-textfield">
+              <label for="inputBody">Body text</label>
+              <textarea id="inputBody" name="inputBody" required>{{ post.body }}</textarea>
+            </div>
+
+            <div class="mui-textfield">
+              <label for="inputSubreddit">Subreddit</label>
+              <input id="inputSubreddit" name="inputSubreddit" type="text" value="{{ post.subreddit }}" required>
+            </div>
+
+            <div class="mui-textfield">
+              <label for="inputTime">Date</label>
+              <input id="inputTime" name="inputTime" type="text" required>
+            </div>
+
+            <div class="mui-textfield">
+              <label for="inputRepeats">Repeats</label>
+              <select id="inputRepeats" name="inputRepeats">
+                <option value="0" {% if post.repeats == false %}selected{% endif %}>No</option>
+                <option value="1" {% if post.repeats == true %}selected{% endif %}>Yes</option>
+              </select>
+            </div>
+
+            <div class="mui-textfield js--interval">
+              <label for="inputInterval">How often does it repeat</label>
+              <select id="inputInterval" name="inputInterval">
+                <option value="daily" {% if post.interval == 86400 %}selected{% endif %}>Daily</option>
+                <option value="weekly" {% if post.interval == 604800 %}selected{% endif %}>Weekly</option>
+              </select>
+            </div>
+
+            <button type="submit" class="mui-btn mui-btn--primary">Save</button>
+          </form>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if post %}
+    <script>
+      handleScheduleFormRepeat();
+      $("#inputTime").datetimepicker({
+        value: "{{ time }}",
+      });
+    </script>
+  {% endif %}
+{% endblock %}

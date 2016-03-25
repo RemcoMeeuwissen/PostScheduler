@@ -28,6 +28,11 @@
           </div>
 
           <div class="mui-textfield">
+            <label for="inputSubreddit">Subreddit</label>
+            <input id="inputSubreddit" name="inputSubreddit" type="text" required>
+          </div>
+
+          <div class="mui-textfield">
             <label for="inputDay">Date</label>
             <input id="inputDay" name="inputDay" type="text" required>
           </div>

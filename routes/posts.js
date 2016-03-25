@@ -13,6 +13,7 @@ router.get('/new', ensureAuthenticated, ensureAuthorized, (req, res) => {
 router.post('/new', ensureAuthenticated, ensureAuthorized, (req, res) => {
   const title = req.body.inputTitle;
   const body = req.body.inputBody;
+  const subreddit = req.body.inputSubreddit;
   const time = new Date(new Date(req.body.inputDay).setHours(req.body.inputHour));
 
   let repeats = false;
@@ -27,6 +28,7 @@ router.post('/new', ensureAuthenticated, ensureAuthorized, (req, res) => {
   const newPost = new Post({
     title,
     body,
+    subreddit,
     time,
     repeats,
     interval,

@@ -54,10 +54,14 @@ router.get('/edit/:id', ensureAuthenticated, ensureAuthorized, (req, res) => {
     } else {
       const time = new Date(post.time);
       const year = time.getFullYear();
-      const month = time.getMonth();
-      const day = time.getDay();
-      const hours = time.getHours();
-      const minutes = time.getMinutes();
+      let month = time.getMonth() + 1;
+      if (month < 10) month = `0${month}`;
+      let day = time.getDate();
+      if (day < 10) day = `0${day}`;
+      let hours = time.getHours();
+      if (hours < 10) hours = `0${hours}`;
+      let minutes = time.getMinutes();
+      if (minutes < 10) minutes = `0${minutes}`;
 
       res.render('posts/edit', {
         post,

@@ -14,7 +14,7 @@ router.post('/new', ensureAuthenticated, ensureAuthorized, (req, res) => {
   const title = req.body.inputTitle;
   const body = req.body.inputBody;
   const subreddit = req.body.inputSubreddit;
-  const time = new Date(new Date(req.body.inputDay).setHours(req.body.inputHour));
+  const time = new Date(req.body.inputTime);
 
   let repeats = false;
   if (req.body.inputRepeats === '1') repeats = true;

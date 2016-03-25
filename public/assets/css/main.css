@@ -17,3 +17,11 @@ body {
 .posts--body h1, .authorize--body h1 {
     margin-top: 0;
 }
+
+.posts--body h2, .posts--body p {
+    display: inline;
+}
+
+.posts--body li {
+    padding: 5px 0;
+}

@@ -31,9 +31,22 @@
         {% endif %}
 
         {% if posts %}
-          <ul>
+          <ul class="mui-list--unstyled">
             {% for post in posts %}
-              <li>{{ post.title }} scheduled on {{ post.time }} to be posted in <a href="http://reddit.com/r/{{ post.subreddit }}">/r/{{ post.subreddit }}</a> - <a href="/posts/edit/{{ post._id }}">Edit</a> or <a href="/posts/delete/{{ post._id }}">delete</a></li>
+              <li>
+                <h2>{{ post.title }}</h2>
+                <p>
+                  Will be posted on {{ post.time }}
+                  {% if post.interval == 86400 %}
+                    repeating daily
+                  {% endif %}
+                  {% if post.interval == 604800 %}
+                    repeating weekly
+                  {% endif %}
+                  to <a href="http://reddit.com/r/{{ post.subreddit }}">/r/{{ post.subreddit }}</a>,
+                  <a href="/posts/edit/{{ post._id }}">Edit</a> or <a href="/posts/delete/{{ post._id }}">delete</a>
+                </p>
+              </li>
             {% endfor %}
           </ul>
         {% endif %}

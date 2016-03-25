@@ -71,6 +71,39 @@ router.get('/edit/:id', ensureAuthenticated, ensureAuthorized, (req, res) => {
   });
 });
 
+router.post('/edit/:id', ensureAuthenticated, ensureAuthorized, (req, res) => {
+  Post.findOne({ _id: req.params.id }, (err, post) => {
+    if (err || post === null) {
+      req.flash('info', 'Could not update the post, please try again later.');
+      res.redirect('/');
+    } else {
+      post.title = req.body.inputTitle;
+      post.body = req.body.inputBody;
+      post.subreddit = req.body.inputSubreddit;
+      post.time = new Date(req.body.inputTime);
+
+      post.repeats = false;
+      if (req.body.inputRepeats === '1') post.repeats = true;
+
+      post.interval = 0;
+      if (post.repeats) {
+        if (req.body.inputInterval === 'daily') post.interval = 60 * 60 * 24;
+        if (req.body.inputInterval === 'weekly') post.interval = 60 * 60 * 24 * 7;
+      }
+
+      post.save((saveErr) => {
+        if (saveErr) {
+          req.flash('info', 'Could not update the post, please try again later.');
+        } else {
+          req.flash('info', 'Updated the post.');
+        }
+
+        res.redirect('/');
+      });
+    }
+  });
+});
+
 router.get('/delete/:id', ensureAuthenticated, ensureAuthorized, (req, res) => {
   Post.findOne({ _id: req.params.id }, (err, post) => {
     if (err || post === null) {

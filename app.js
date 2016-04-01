@@ -49,9 +49,9 @@ passport.deserializeUser((obj, done) => {
 });
 
 passport.use(new RedditStrategy({
-  clientID: config.reddit.key,
-  clientSecret: config.reddit.secret,
-  callbackURL: config.reddit.callback,
+  clientID: config.reddit.oauth.key,
+  clientSecret: config.reddit.oauth.secret,
+  callbackURL: config.reddit.oauth.callback,
 }, (accessToken, refreshToken, profile, done) => done(null, profile)));
 
 nunjucks.configure('views', {

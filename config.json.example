@@ -1,8 +1,17 @@
 {
     "reddit": {
-        "key": "key",
-        "secret": "secret",
-        "callback": "callback"
+        "oauth": {
+            "key": "key",
+            "secret": "secret",
+            "callback": "callback"
+        },
+        "script": {
+            "useragent": "useragent",
+            "key": "key",
+            "secret": "secret",
+            "username": "username",
+            "password": "password"
+        }
     },
     "session": {
         "secret": "secret"

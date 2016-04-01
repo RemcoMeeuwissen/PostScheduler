@@ -1,0 +1,80 @@
+#!/usr/bin/env node
+'use strict';
+
+const config = require('../config.json');
+
+const mongoose = require('mongoose');
+const Rawjs = require('raw.js');
+const reddit = new Rawjs(config.reddit.script.useragent);
+
+const db = mongoose.connect('mongodb://localhost/PostScheduler');
+
+const Post = require('../models/post.js');
+
+reddit.setupOAuth2(
+  config.reddit.script.key,
+  config.reddit.script.secret
+);
+
+const now = new Date;
+now.setMinutes(now.getMinutes() + 5);
+
+function quit() {
+  reddit.logout();
+  db.disconnect();
+}
+
+function updatePost(post) {
+  if (post.repeats && post.interval === 0) {
+    post.remove((err) => {
+      if (err) console.log(err);
+    });
+  } else {
+    const time = new Date(post.time);
+    post.time = time.setSeconds(time.getSeconds() + post.interval);
+
+    post.save((err) => {
+      if (err) console.log(err);
+    });
+  }
+}
+
+function handlePost(posts) {
+  const post = posts.pop();
+
+  reddit.submit({ title: post.title, text: post.body, r: post.subreddit }, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      updatePost(post);
+    }
+  });
+
+  setTimeout(() => {
+    if (posts.length === 0) {
+      quit();
+    } else {
+      handlePost(posts);
+    }
+  }, 3000);
+}
+
+reddit.auth({
+  username: config.reddit.script.username,
+  password: config.reddit.script.password,
+}, (err) => {
+  if (err) {
+    console.log(err);
+    quit();
+  } else {
+    Post.find({ time: { $lt: now } }, (findErr, posts) => {
+      if (findErr) console.log(findErr);
+
+      if (posts.length === 0) {
+        quit();
+      } else {
+        handlePost(posts);
+      }
+    });
+  }
+});

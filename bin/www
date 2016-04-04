@@ -7,6 +7,15 @@
 const app = require('../app');
 const debug = require('debug')('{name}:server');
 const http = require('http');
+const Winston = require('winston');
+
+const logger = new (Winston.Logger)({
+  transports: [
+    new (Winston.transports.File)({
+      filename: 'scheduler.log',
+    }),
+  ],
+});
 
 /**
  * Get port from environment and store in Express.
@@ -53,11 +62,11 @@ function onError(error) {
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(`${bind } requires elevated privileges`);
+      logger.log('error', '%s requires elevated privileges', bind);
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(`${ bind } is already in use`);
+      logger.log('error', '%s is already in use', bind);
       process.exit(1);
       break;
     default:

@@ -6,6 +6,15 @@ const config = require('../config.json');
 const mongoose = require('mongoose');
 const Rawjs = require('raw.js');
 const reddit = new Rawjs(config.reddit.script.useragent);
+const Winston = require('winston');
+
+const logger = new (Winston.Logger)({
+  transports: [
+    new (Winston.transports.File)({
+      filename: 'scheduler.log',
+    }),
+  ],
+});
 
 const db = mongoose.connect('mongodb://localhost/PostScheduler');
 
@@ -27,14 +36,14 @@ function quit() {
 function updatePost(post) {
   if (post.repeats && post.interval === 0) {
     post.remove((err) => {
-      if (err) console.log(err);
+      if (err) logger.log('error', 'Unable to remove post %s (err: %s)', post.title, err);
     });
   } else {
     const time = new Date(post.time);
     post.time = time.setSeconds(time.getSeconds() + post.interval);
 
     post.save((err) => {
-      if (err) console.log(err);
+      if (err) logger.log('error', 'Unable to update post %s (err: %s)', post.title, err);
     });
   }
 }
@@ -44,8 +53,9 @@ function handlePost(posts) {
 
   reddit.submit({ title: post.title, text: post.body, r: post.subreddit }, (err) => {
     if (err) {
-      console.log(err);
+      logger.log('error', 'Unable to submit post %s to reddit (err: %s)', post.title, err);
     } else {
+      logger.log('info', 'Successfully posted %s to /r/%s', post.title, post.subreddit);
       updatePost(post);
     }
   });
@@ -64,11 +74,11 @@ reddit.auth({
   password: config.reddit.script.password,
 }, (err) => {
   if (err) {
-    console.log(err);
+    logger.log('error', 'Unable to authenticate to Reddit: %s', err);
     quit();
   } else {
     Post.find({ time: { $lt: now } }, (findErr, posts) => {
-      if (findErr) console.log(findErr);
+      if (findErr) logger.log('error', 'Unable to find posts: %s', findErr);
 
       if (posts.length === 0) {
         quit();

@@ -12,7 +12,8 @@
     "serve-static": "~1.10",
     "connect-flash": "~0.1",
     "body-parser": "~1.15",
-    "raw.js": "~0.4"
+    "raw.js": "~0.4",
+    "winston": "~2.2"
   },
   "devDependencies": {
     "eslint": "~2.4",

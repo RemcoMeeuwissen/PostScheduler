@@ -34,7 +34,7 @@ function quit() {
 }
 
 function updatePost(post) {
-  if (post.repeats && post.interval === 0) {
+  if (! post.repeats || post.interval === 0) {
     post.remove((err) => {
       if (err) logger.log('error', 'Unable to remove post %s (err: %s)', post.title, err);
     });
